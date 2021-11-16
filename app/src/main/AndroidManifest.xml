@@ -11,10 +11,13 @@
         android:theme="@style/Theme.FinalProject">
         <activity
 
-            android:name=".GameActivity"
             android:name=".MusicHolderActivity"
-
             android:exported="true" />
+
+        <activity
+            android:name=".GameActivity"
+            android:exported="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
