@@ -3,10 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/flame/Documents/School/2021_Fall/DIG4634/DIG4634_FinalProject/app/src/main/res/layout/activity_background_select.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/flame/Documents/School/2021_Fall/DIG4634/DIG4634_FinalProject/app/src/main/res/layout/activity_game.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/kwkal/AndroidStudioProjects/DIG4634_FinalProject/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/layout/activity_game.xml" value="0.24114583333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/activity_music_holder.xml" value="0.2203125" />
       </map>
     </option>
   </component>
