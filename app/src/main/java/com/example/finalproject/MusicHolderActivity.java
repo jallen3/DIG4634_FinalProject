@@ -7,7 +7,9 @@ import android.widget.Button;
 
 public class MusicHolderActivity extends AppCompatActivity {
 
-    Button btn3;
+    public static Button btn3;
+    public static Boolean isEnabled = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,6 +18,14 @@ public class MusicHolderActivity extends AppCompatActivity {
         //TODO: Deactivate buttons
         btn3 = (Button) findViewById(R.id.button3);
         btn3.setEnabled(false);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(isEnabled){
+            btn3.setEnabled(true);
+        }
     }
 
 }

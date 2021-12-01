@@ -24,6 +24,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     // Use to Randomize the location and speed of objects
     static Random random = new Random();
 
+    MusicHolderActivity ma;
+
     //Define paints and images
     Paint whiteText;
     Bitmap player;
@@ -145,6 +147,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         }
 
         //TODO: Unlock new sound - If score = ___ { Unlock music }
+        if(score == 2) {
+            MusicHolderActivity.isEnabled = true;
+        }
 
 
         //If music notes fall off screen reset to top
