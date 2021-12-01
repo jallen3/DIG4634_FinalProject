@@ -1,18 +1,5 @@
 package com.example.finalproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
-//public class GameActivity extends AppCompatActivity {
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_game);
-//    }
-//}
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,7 +25,12 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     static Random random = new Random();
 
     //Define paints and images
-
+    Paint whiteText;
+    Bitmap player;
+    Bitmap c1;
+    Bitmap c2;
+    Bitmap c3;
+    Bitmap c4;
 
     //Set message
     String message = ""; //TODO - Is there a way to time the message placed on the screen?
@@ -51,7 +43,16 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     int score = 0;
 
     //Initialize img positions
-
+    int player_x_pos = 0;
+    int player_y_pos = 0;
+    int c1_x_pos = 100;
+    int c1_y_pos = 0;
+    int c2_x_pos = 300;
+    int c2_y_pos = 0;
+    int c3_x_pos = 500;
+    int c3_y_pos = 0;
+    int c4_x_pos = 800;
+    int c4_y_pos = 0;
 
     //Initialize Accelerometer values - Professor initializes over draw(), does that matter?
     float acc_x = 0;
@@ -62,13 +63,19 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        //Initiate Paints
+        //Initialize Paints
+        whiteText = new Paint();
+        whiteText.setColor(Color.WHITE); //will paint object white
+        whiteText.setTextSize(100);
 
+        //Initialize Bitmap images
+        player = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.c1), 200, 200, false); //Load image into bitMap variable
+        c1 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.c2), 200, 200, false);
+        c2 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.c3), 200, 200, false);
+        c3 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.c4), 200, 200, false);
+        c4 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.c5), 200, 200, false);
 
-        //Initiate Bitmap images
-
-
-        //Initiate SensorManager
+        //Initialize SensorManager
         SensorManager manager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); //controls sensor devices
         Sensor accelerometer = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); //select sensor you want to access and manage
         //Check to see if something is in the accelerometer or if it is an empty function
@@ -100,17 +107,59 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     public void update(int width, int height){
 
         //Update img positions every time its drawn
+        player_x_pos -= acc_x * 2;
+        c1_y_pos += random.nextInt(5) + 5;
+        c2_y_pos += random.nextInt(5) + 5;
+        c3_y_pos += random.nextInt(5) + 5;
+        c4_y_pos += random.nextInt(5) + 5;
 
+        //Ensure player doesn't go beyond canvas limits
+        if(player_x_pos < 0) {
+            player_x_pos = 0;
+        }
+        else if(player_x_pos > width - 200) { //width - size of moneyBag
+            player_x_pos = width - 200;
+        }
 
-        //Ensure images don't go beyond canvas limits
-
-        //TODO: [INSERT_PLAYER_IMG] = height-245; //sets the actual y position of the player on the screen
-
+        player_y_pos = height-200; //sets the actual y position of the player on the screen
+        
         //Check if objects are close to the player object
+        if(Math.abs(player_x_pos - c1_x_pos) < 200 && Math.abs(player_y_pos - c1_y_pos) < 200 ) {
+            c1_y_pos = 0;
+            score++;
+        }
+
+        if(Math.abs(player_x_pos - c2_x_pos) < 200 && Math.abs(player_y_pos - c2_y_pos) < 200 ) {
+            c2_y_pos = 0;
+            score++;
+        }
+
+        if(Math.abs(player_x_pos - c3_x_pos) < 200 && Math.abs(player_y_pos - c3_y_pos) < 200 ) {
+            c3_y_pos = 0;
+            score++;
+        }
+
+        if(Math.abs(player_x_pos - c4_x_pos) < 200 && Math.abs(player_y_pos - c4_y_pos) < 200) {
+            c4_y_pos = 0;
+            score++;
+        }
+
+        //TODO: Unlock new sound - If score = ___ { Unlock music }
 
 
         //If music notes fall off screen reset to top
+        if(c1_y_pos > height || c2_y_pos > height || c3_y_pos > height || c4_y_pos > height) {
+            c1_y_pos = 0;
+            c2_y_pos = 0;
+            c3_y_pos = 0;
+            c4_y_pos = 0;
 
+            //Place objects in different locations along the width of the screen
+            c1_x_pos = random.nextInt(width);
+            c2_x_pos = random.nextInt(width);
+            c3_x_pos = random.nextInt(width);
+            c4_x_pos = random.nextInt(width);
+        }
 
     }
 
@@ -123,8 +172,15 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         update(canvas.getWidth(), canvas.getHeight()); //Update animated variables & define canvas size
 
-        //TODO: Draw to canvas
-
+        //TODO: set background as moving image
+        canvas.drawColor(Color.rgb(159, 210,227)); //Set background color
+        canvas.drawText("Score: " + score, 20 , 125, whiteText); //Set score text
+        canvas.drawText(message, 30 , 300, whiteText); //Set game message text
+        canvas.drawBitmap(player, player_x_pos, player_y_pos, null); //TODO - Position player in middle of the screen
+        canvas.drawBitmap(c1, c1_x_pos, c1_y_pos, null);
+        canvas.drawBitmap(c2, c2_x_pos, c2_y_pos, null);
+        canvas.drawBitmap(c3, c3_x_pos, c3_y_pos, null);
+        canvas.drawBitmap(c4, c4_x_pos, c4_y_pos, null);
 
         surfaceHolder.unlockCanvasAndPost(canvas); //unlocks canvas and posts the 'drawings'
     }
