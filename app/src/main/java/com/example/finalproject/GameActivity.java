@@ -13,6 +13,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -24,7 +25,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     // Use to Randomize the location and speed of objects
     static Random random = new Random();
 
-    MusicHolderActivity ma;
+    //Define Music Player
+    MediaPlayer mediaPlayer;
 
     //Define paints and images
     Paint whiteText;
@@ -64,6 +66,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        //Sound
+        mediaPlayer = MediaPlayer.create(this, R.raw.slow);
+        mediaPlayer.start();
 
         //Initialize Paints
         whiteText = new Paint();
@@ -147,9 +153,18 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         }
 
         //TODO: Unlock new sound - If score = ___ { Unlock music }
-        if(score == 2) {
+        if(score == 5) {
             MusicHolderActivity.isEnabled = true;
+            message = "New Level Unlocked";
+
         }
+
+        //if sound stops close activity
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                finish();
+            }
+        });
 
 
         //If music notes fall off screen reset to top
