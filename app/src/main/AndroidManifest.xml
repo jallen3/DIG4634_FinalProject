@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
         <activity
+            android:name=".GameActivity3"
+            android:exported="true" />
+        <activity
+            android:name=".GameActivity2"
+            android:exported="true" />
+        <activity
             android:name=".BackgroundSelect"
             android:exported="true" />
         <activity

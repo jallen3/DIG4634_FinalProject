@@ -26,5 +26,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(),MusicHolderActivity.class);
         startActivity(intent);
     }
+
 }
 
