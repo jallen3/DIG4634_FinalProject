@@ -21,7 +21,7 @@ import android.view.SurfaceView;
 
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity implements SensorEventListener, SurfaceHolder.Callback {
+public class GameActivity3 extends AppCompatActivity implements SensorEventListener, SurfaceHolder.Callback {
     // Use to Randomize the location and speed of objects
     static Random random = new Random();
 
@@ -41,7 +41,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     //Define surfaceHolder and Animator
     SurfaceHolder surfaceHolder;
-    Animator animator;
+    Animator3 animator;
 
     //Initialize score
     public static int score = 0;
@@ -65,10 +65,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.activity_game3);
 
         //Sound
-        mediaPlayer = MediaPlayer.create(this, R.raw.slow);
+        mediaPlayer = MediaPlayer.create(this, R.raw.fast);
         mediaPlayer.start();
 
         //Initialize Paints
@@ -92,11 +92,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         }
 
         //Initialize SurfaceView
-        SurfaceView surfaceView = findViewById(R.id.surfaceView);
+        SurfaceView surfaceView = findViewById(R.id.surfaceView3);
         surfaceView.getHolder().addCallback(this); //Get hold of the surface and associate this class as a callback (What does that mean? Associated this class with the surfaceView obj in activity_main.xml)
 
         //Initialize Animator
-        animator = new Animator(this);
+        animator = new Animator3(this);
         animator.start();//starts while loop in animator.java
     }
 
@@ -116,10 +116,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         //Update img positions every time its drawn
         player_x_pos -= acc_x * 2;
-        c1_y_pos += random.nextInt(5) + 5;
-        c2_y_pos += random.nextInt(5) + 5;
-        c3_y_pos += random.nextInt(5) + 5;
-        c4_y_pos += random.nextInt(5) + 5;
+        c1_y_pos += random.nextInt(5) + 15;
+        c2_y_pos += random.nextInt(5) + 15;
+        c3_y_pos += random.nextInt(5) + 15;
+        c4_y_pos += random.nextInt(5) + 15;
 
         //Ensure player doesn't go beyond canvas limits
         if(player_x_pos < 0) {
@@ -130,7 +130,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         }
 
         player_y_pos = height-200; //sets the actual y position of the player on the screen
-        
+
         //Check if objects are close to the player object
         if(Math.abs(player_x_pos - c1_x_pos) < 200 && Math.abs(player_y_pos - c1_y_pos) < 200 ) {
             c1_y_pos = 0;
@@ -152,10 +152,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             score++;
         }
 
-        //TODO: Unlock new sound - If score = ___ { Unlock music }
-        if(score >= 5) {
-            MusicHolderActivity.isEnabled1 = true;
-            message = "New Level Unlocked";
+        if(score >= 15) {
+//            MusicHolderActivity.isEnabled1 = true;
+            message = "You Rock!";
 
         }
 
@@ -193,7 +192,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         update(canvas.getWidth(), canvas.getHeight()); //Update animated variables & define canvas size
 
         //TODO: set background as moving image
-        canvas.drawColor(Color.rgb(159, 210,227)); //Set background color
+        canvas.drawColor(Color.rgb(159, 227,100)); //Set background color
         canvas.drawText("Score: " + score, 20 , 125, whiteText); //Set score text
         canvas.drawText(message, 30 , 300, whiteText); //Set game message text
         canvas.drawBitmap(player, player_x_pos, player_y_pos, null); //TODO - Position player in middle of the screen
