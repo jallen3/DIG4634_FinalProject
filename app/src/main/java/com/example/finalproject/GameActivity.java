@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -162,7 +163,17 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         //if sound stops close activity
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             public void onCompletion(MediaPlayer mp) {
-                finish();
+
+                if(MainActivity.quickplay && MusicHolderActivity.isEnabled1){
+                    Intent intent = new Intent(getBaseContext(),GameActivity2.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    score = 0;
+                    finish();
+                }
+
             }
         });
 
