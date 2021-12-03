@@ -161,6 +161,7 @@ public class GameActivity3 extends AppCompatActivity implements SensorEventListe
         //if sound stops close activity
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             public void onCompletion(MediaPlayer mp) {
+                score = 0;
                 finish();
             }
         });

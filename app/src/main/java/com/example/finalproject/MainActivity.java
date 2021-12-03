@@ -10,6 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button button4;
+    public static boolean quickplay = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,11 +19,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onPlayClicked(View view){
+        quickplay = true;
         Intent intent = new Intent(getBaseContext(),GameActivity.class);
         startActivity(intent);
+
     }
 
     public void onMusicClicked(View view){
+        quickplay = false;
         Intent intent = new Intent(getBaseContext(),MusicHolderActivity.class);
         startActivity(intent);
     }
