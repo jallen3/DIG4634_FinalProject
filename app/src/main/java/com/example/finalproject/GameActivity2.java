@@ -78,11 +78,11 @@ public class GameActivity2 extends AppCompatActivity implements SensorEventListe
         whiteText.setTextSize(100);
 
         //Initialize Bitmap images
-        player = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.c1), 200, 200, false); //Load image into bitMap variable
-        c1 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.c2), 200, 200, false);
-        c2 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.c3), 200, 200, false);
-        c3 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.c4), 200, 200, false);
-        c4 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.c5), 200, 200, false);
+        player = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.player_icon), 200, 200, false); //Load image into bitMap variable
+        c1 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.music_notes_1), 200, 200, false);
+        c2 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.music_notes_2), 200, 200, false);
+        c3 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.music_notes_3), 200, 200, false);
+        c4 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.music_notes_4), 200, 200, false);
 
         //Initialize SensorManager
         SensorManager manager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); //controls sensor devices
