@@ -52,12 +52,16 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     int player_y_pos = 0;
     int c1_x_pos = 100;
     int c1_y_pos = 0;
+    int c1_initialize = 0;
     int c2_x_pos = 300;
     int c2_y_pos = 0;
+    int c2_initialize = 40;
     int c3_x_pos = 500;
     int c3_y_pos = 0;
+    int c3_initialize = 80;
     int c4_x_pos = 800;
     int c4_y_pos = 0;
+    int c4_initialize = 120;
 
     //Initialize Accelerometer values - Professor initializes over draw(), does that matter?
     float acc_x = 0;
@@ -117,10 +121,33 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         //Update img positions every time its drawn
         player_x_pos -= acc_x * 2;
-        c1_y_pos += random.nextInt(5) + 5;
-        c2_y_pos += random.nextInt(5) + 5;
-        c3_y_pos += random.nextInt(5) + 5;
-        c4_y_pos += random.nextInt(5) + 5;
+        if (c1_initialize <= 0){
+            c1_y_pos += random.nextInt(5) + 5;
+        }
+        else{
+            c1_initialize--;
+        }
+
+        if(c2_initialize <= 0){
+            c2_y_pos += random.nextInt(5) + 5;
+        }
+        else{
+            c2_initialize--;
+        }
+
+        if(c3_initialize <= 0){
+            c3_y_pos += random.nextInt(5) + 5;
+        }
+        else{
+            c3_initialize--;
+        }
+
+        if(c4_initialize <= 0){
+            c4_y_pos += random.nextInt(5) + 5;
+        }
+        else{
+            c4_initialize--;
+        }
 
         //Ensure player doesn't go beyond canvas limits
         if(player_x_pos < 0) {
@@ -178,6 +205,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         });
 
 
+        /*
         //If music notes fall off screen reset to top
         if(c1_y_pos > height || c2_y_pos > height || c3_y_pos > height || c4_y_pos > height) {
             c1_y_pos = 0;
@@ -189,6 +217,24 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             c1_x_pos = random.nextInt(width);
             c2_x_pos = random.nextInt(width);
             c3_x_pos = random.nextInt(width);
+            c4_x_pos = random.nextInt(width);
+        }
+        */
+
+        if(c1_y_pos > height){
+            c1_y_pos = 0;
+            c1_x_pos = random.nextInt(width);
+        }
+        if(c2_y_pos > height){
+            c2_y_pos = 0;
+            c2_x_pos = random.nextInt(width);
+        }
+        if(c3_y_pos > height){
+            c3_y_pos = 0;
+            c3_x_pos = random.nextInt(width);
+        }
+        if(c4_y_pos > height){
+            c4_y_pos = 0;
             c4_x_pos = random.nextInt(width);
         }
 
